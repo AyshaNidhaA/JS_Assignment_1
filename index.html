@@ -1,0 +1,694 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango Catch Game</title>
+      <style>
+
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            background-color: #6c805e;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+        h1{
+            margin: 0;
+            padding: 15px;
+                       background-color: #6c805e;
+
+            color: #ffd84d;
+            font-size: 36px;
+        }
+        #treebc{
+            width: 1200px;
+            height: 350px;
+            max-width: 95%;
+            margin: 20px auto;
+            border: 6px solid #789b43;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px black;
+            background-color: #81aad4;
+        }
+        #basket{
+    width:106px;
+    height:60px;
+    position:absolute;
+    top:500px;
+    left:265px;
+        }
+        #scorebox{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+
+            background-color: #263d18;
+            border: 3px solid #789b43;
+            border-radius: 12px;
+
+            padding: 10px 20px;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            z-index: 10;
+        }
+        #lifebox{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            background-color: #263d18;
+            border: 3px solid #789b43;
+            border-radius: 12px;
+
+            padding: 10px 20px;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            z-index: 10;
+        }
+        #scoretitle{
+            display: block;
+            color: #ffd84d;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        #lifetitle{
+            display: block;
+            color: #ff7070;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        #start{
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: #ffb300;
+            color: #251700;
+            border: none;
+            border-radius: 12px;
+            padding: 13px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #a66d00;
+            z-index: 10;
+        }
+
+        #start:hover{
+            background-color: #ffc533;
+        }
+
+
+        #start:active{
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #a66d00;
+        }
+        #mark{
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #263d18;
+            color: #ffd84d;
+            border: 3px solid #789b43;
+            border-radius: 12px;
+            padding: 12px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        #gameoverbox{
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            background-color: #263d18;
+            border: 4px solid #ffd84d;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 20px black;
+            z-index: 20;
+            display: none;
+        }
+
+
+        #gameovertitle{
+            color: #ff7070;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+
+        #gameovertext{
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+
+        #tryagain{
+            background-color: #ffb300;
+            color: #251700;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 22px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        #tryagain:hover{
+            background-color: #ffc533;
+        }
+
+
+          @media(max-width:400px){
+            h1{
+                font-size: 10px;
+            }
+            #treebc{
+                height: 400px;
+            }
+            #scorebox,
+            #lifebox{
+                padding: 6px 8px;
+                font-size: 9px;
+            }
+            #start,
+            #mark{
+                font-size: 10px;
+                padding: 8px 10px;
+                 bottom: 10px;
+            right: 10px;
+             border: 2px solid #789b43;
+            border-radius: 7px;
+            padding: 8px 18px;
+            }
+             #basket{
+        width:70px;
+        height:35px;
+        top:420px;
+        left:150px;
+    }
+
+        }
+       
+
+        @media(max-width:700px){
+            h1{
+                font-size: 27px;
+            }
+            #treebc{
+                height: 600px;
+            }
+            #scorebox,
+            #lifebox{
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            #start,
+            #mark{
+                font-size: 15px;
+                padding: 10px 15px;
+                 border: 2px solid #789b43;
+            border-radius: 7px;
+            padding: 8px 18px;
+            }
+             #basket{
+        width:80px;
+        height:45px;
+        top:520px;
+        left:150px;
+    }
+
+        }
+         @media(max-width:1000px){
+            h1{
+                font-size: 27px;
+            }
+            #treebc{
+                height: 600px;
+            }
+            #scorebox,
+            #lifebox{
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            #start,
+            #mark{
+                font-size: 15px;
+                padding: 10px 15px;
+                 border: 2px solid #789b43;
+            border-radius: 7px;
+            padding: 8px 18px;
+            }
+             #basket{
+        width:80px;
+        height:45px;
+        top:520px;
+        left:180px;
+    }
+         }
+   
+   
+    </style>
+</head>
+<body>
+<h1>🥭MANGO RUSH🥭</h1>
+
+<div id="treebc"style="background-image: url(./images/tree1.png);background-size: contain;background-position: center;background-repeat: no-repeat;
+background-color: #7596ba;min-height: 100vh;position: relative;">
+    <div id="scorebox">
+        <span id="scoretitle">🏆 SCORE</span>
+        <span id="scoretext">Catch mangoes!</span>
+    </div>
+
+    <div id="lifebox">
+
+        <span id="lifetitle">❤️ LIFE</span>
+        <span>3 Continuous Misses</span>
+
+    </div>
+
+    <img id="mango1" src="./images/mango2.png"style=" width:36px; height:30px; position:absolute; top:225px; left:400px; ">
+
+    <img id="mango2" src="./images/mango3.png"style="width:36px;
+    height:30px; position:absolute; top:120px; left:500px; ">
+    <img id="mango3" src="./images/mango2.png"style="width:36px;height:30px;position:absolute;top:185px;left:600px;">
+ <img id="mango4" src="./images/mango3.png" style=" width:36px; height:30px; position:absolute; top:70px; left:700px; ">
+    <img id="mango5" src="./images/mango2.png"style="width:36px;height:30px;position:absolute;top:180px;left:800px;">
+    <img id="basket" src="./images/basket.png">
+    <audio id="catchsound" src="./Video Project.m4a"></audio>
+
+    <button id="start">
+        ▶ START GAME
+    </button>
+
+    <button id="mark">
+        Mangoes: 0
+    </button>
+
+    <div id="gameoverbox">
+
+        <div id="gameovertitle">
+            GAME OVER
+        </div>
+
+        <div id="gameovertext">
+            Try Again!
+        </div>
+
+        <button id="tryagain">
+            🔄 TRY AGAIN
+        </button>
+    </div>
+</div>
+
+
+
+<script>
+
+var basketx = 265
+var baskety = 500
+
+var basket = document.getElementById('basket')
+var mango1x = 400
+var mango1y = 225
+var mango1 = document.getElementById('mango1')
+var mango1done = false
+var mango1miss = false
+var mango2x = 500
+var mango2y = 120
+var mango2 = document.getElementById('mango2')
+var mango2done = false
+var mango2miss = false
+var mango3x = 600
+var mango3y = 185
+var mango3 = document.getElementById('mango3')
+var mango3done = false
+var mango3miss = false
+var mango4x = 700
+var mango4y = 70
+var mango4 = document.getElementById('mango4')
+var mango4done = false
+var mango4miss = false
+var mango5x = 800
+var mango5y = 180
+var mango5 = document.getElementById('mango5')
+var mango5done = false
+var mango5miss = false
+var mark = 0
+var continuousmiss = 0
+var gameover = false
+var round = 0
+var started = false
+var catchsound = document.getElementById('catchsound')
+document.addEventListener('keydown', function(event){
+    if(event.key == 'ArrowLeft'){
+        basketx -= 50
+        basket.style.left = basketx + 'px'
+    }
+    if(event.key == 'ArrowRight'){
+        basketx += 50
+        basket.style.left = basketx + 'px'
+    }
+})
+
+document.getElementById('start').addEventListener('click', function(){
+    if(started == true){
+        return
+    }
+    started = true
+
+    setInterval(function(){
+        if(gameover == false){
+   if(mango1done == false && mango1miss == false){
+   mango1y += 30
+    mango1.style.top = mango1y + 'px'
+    if(mango1y >= baskety){
+                    if(mango1x >= basketx &&    mango1x <= basketx + 106){
+                        mark++
+                        catchsound.play()
+                        continuousmiss = 0
+                        round++
+                        if(round == 5){
+                            round = 1
+                        }
+                        if(round == 1){
+                            mango1x = 450
+                            mango1y = 115
+                        }
+                        if(round == 2){
+                            mango1x = 500
+                            mango1y = 80
+                        }
+                        if(round == 3){
+                            mango1x = 600
+                            mango1y = 100
+                        }
+                        if(round == 4){
+                            mango1x = 700
+                            mango1y = 70
+                        }
+                        mango1.style.left = mango1x + 'px'
+                        mango1.style.top = mango1y + 'px'
+                    }
+                    else{
+                        continuousmiss++
+                        mango1miss = true
+                    }
+                }
+            }
+            if(mango1miss == true){
+                mango1y += 30
+                mango1.style.top = mango1y + 'px'
+
+                if(mango1y >= baskety + 100){
+                    mango1x = 400
+                    mango1y = 50
+                    mango1.style.left = mango1x + 'px'
+                    mango1.style.top = mango1y + 'px'
+                    mango1miss = false
+
+                }
+
+            }
+
+            if(mango2done == false && mango2miss == false){
+              mango2y += 40
+                mango2.style.top = mango2y + 'px'
+
+                if(mango2y >= baskety){
+                    if(mango2x >= basketx &&
+                       mango2x <= basketx + 106){
+                        mark++
+                        catchsound.play()
+                        continuousmiss = 0
+                        round++
+                        if(round == 5){
+                            round = 1
+                        }
+                        if(round == 1){
+                            mango2x = 550
+                            mango2y = 70
+                        }
+
+                        if(round == 2){
+                            mango2x = 600
+                            mango2y = 140
+                        }
+
+                        if(round == 3){
+                            mango2x = 750
+                            mango2y = 90
+                        }
+
+                        if(round == 4){
+                            mango2x = 450
+                            mango2y = 130
+                        }
+
+                        mango2.style.left = mango2x + 'px'
+                        mango2.style.top = mango2y + 'px'
+
+                    }
+                    else{
+                        continuousmiss++
+                        mango2miss = true
+
+                    }
+
+                }
+
+            }
+
+            if(mango2miss == true){
+                mango2y += 40
+                mango2.style.top = mango2y + 'px'
+
+                if(mango2y >= baskety + 100){
+                    mango2x = 500
+                    mango2y = 50
+                    mango2.style.left = mango2x + 'px'
+                    mango2.style.top = mango2y + 'px'
+                    mango2miss = false
+                }
+            }
+
+            if(mango3done == false && mango3miss == false){
+                mango3y += 20
+                mango3.style.top = mango3y + 'px'
+
+                if(mango3y >= baskety){
+                    if(mango3x >= basketx &&
+                       mango3x <= basketx + 106){
+                        mark++
+                        catchsound.play()
+                        continuousmiss = 0
+                        round++
+                        if(round == 5){
+                            round = 1
+                        }
+
+                        if(round == 1){
+                            mango3x = 650
+                            mango3y = 160
+                        }
+
+                        if(round == 2){
+                            mango3x = 700
+                            mango3y = 100
+                        }
+
+                        if(round == 3){
+                            mango3x = 500
+                            mango3y = 150
+                        }
+
+                        if(round == 4){
+                            mango3x = 800
+                            mango3y = 160
+                        }
+
+                        mango3.style.left = mango3x + 'px'
+                        mango3.style.top = mango3y + 'px'
+
+                    }
+                    else{
+                        continuousmiss++
+                        mango3miss = true
+                    }
+
+                }
+
+            }
+
+
+        
+
+            if(mango3miss == true){
+                mango3y += 20
+                mango3.style.top = mango3y + 'px'
+
+                if(mango3y >= baskety + 100){
+                    mango3x = 600
+                    mango3y = 50
+                    mango3.style.left = mango3x + 'px'
+                    mango3.style.top = mango3y + 'px'
+                    mango3miss = false
+                }
+
+            }
+
+            if(mango4done == false && mango4miss == false){
+                mango4y += 50
+                mango4.style.top = mango4y + 'px'
+
+                if(mango4y >= baskety){
+
+                    if(mango4x >= basketx &&
+                       mango4x <= basketx + 106){
+                        mark++
+                        catchsound.play()
+                        continuousmiss = 0
+                        round++
+                        if(round == 5){
+                            round = 1
+                        }
+
+                        if(round == 1){
+                            mango4x = 750
+                            mango4y = 130
+                        }
+
+                        if(round == 2){
+                            mango4x = 800
+                            mango4y = 170
+                        }
+
+                        if(round == 3){
+                            mango4x = 650
+                            mango4y = 190
+                        }
+
+                        if(round == 4){
+                            mango4x = 550
+                            mango4y = 90
+                        }
+                        mango4.style.left = mango4x + 'px'
+                        mango4.style.top = mango4y + 'px'
+                    }
+                    else{
+                        continuousmiss++
+                        mango4miss = true
+                    }
+
+                }
+
+            }
+
+            if(mango4miss == true){
+                mango4y += 50
+                mango4.style.top = mango4y + 'px'
+
+                if(mango4y >= baskety + 100){
+                    mango4x = 700
+                    mango4y = 50
+                    mango4.style.left = mango4x + 'px'
+                    mango4.style.top = mango4y + 'px'
+                    mango4miss = false
+
+                }
+
+            }
+
+            if(mango5done == false && mango5miss == false){
+                mango5y += 35
+                mango5.style.top = mango5y + 'px'
+                if(mango5y >= baskety){
+                    if(mango5x >= basketx &&
+                       mango5x <= basketx + 106){
+                        mark++
+                        catchsound.play()
+                        continuousmiss = 0
+                        round++
+                        if(round == 5){
+                            round = 1
+                        }
+
+                        if(round == 1){
+                            mango5x = 700
+                            mango5y = 100
+                        }
+
+                        if(round == 2){
+                            mango5x = 450
+                            mango5y = 180
+                        }
+
+                        if(round == 3){
+                            mango5x = 800
+                            mango5y = 120
+                        }
+
+                        if(round == 4){
+                            mango5x = 650
+                            mango5y = 130
+                        }
+
+                        mango5.style.left = mango5x + 'px'
+                        mango5.style.top = mango5y + 'px'
+
+                    }
+                    else{
+                        continuousmiss++
+                        mango5miss = true
+                    }
+
+                }
+
+            }
+
+            if(mango5miss == true){
+                mango5y += 35
+                mango5.style.top = mango5y + 'px'
+                if(mango5y >= baskety + 100){
+                    mango5x = 800
+                    mango5y = 50
+                    mango5.style.left = mango5x + 'px'
+                    mango5.style.top = mango5y + 'px'
+                    mango5miss = false
+                }
+
+            }
+            document.getElementById('mark').innerText =
+            'Mangoes: ' + mark
+
+            if(continuousmiss >= 3){
+                document.getElementById('gameoverbox').style.display = 'block'
+                gameover = true
+            }
+
+        }
+
+    }, 500)
+
+})
+
+</script>
+
+</body>
+</html>
